@@ -1,0 +1,69 @@
+---
+title: "Problem 1"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include = FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(janitor)
+library(readr)
+library(haven)
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(knitr)
+library(ggridges)
+library(ggthemes)
+library(sas7bdat)
+library(stringr)
+library(forcats)
+library(viridis)
+library(plotly)
+library(rnoaa)
+```
+
+```{r, load and clean data, include = FALSE}
+# Get a list of all NY station IDs
+stations <- ghcnd_stations()
+nystationids <-  stations %>% 
+  filter(state == "NY") %>% 
+  distinct(id)
+
+# Pull the desired weather data for all of these stations
+nydat <- meteo_pull_monitors(nystationids$id, 
+                             date_min = "1981-01-01", 
+                             date_max = "2010-12-31", 
+                             var = c("PRCP", "SNOW", "SNWD", "TMAX", "TMIN"))
+
+noaa_data = janitor::clean_names(noaa_data)
+noaa_data <- separate(noaa_data, "date", c("year", "month", "day"), sep = "-")
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+```
+
+### Chart C
+
+```{r}
+
+```
+

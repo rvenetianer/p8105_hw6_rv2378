@@ -1,0 +1,26 @@
+---
+title: "The National Oceanic and Atmospheric Association (NOAA)"
+---
+
+### Background to the NOAA data set
+
+#### Data collection
+
+Access date: August 15, 2017
+
+
+##### Variable descriptions
+
+id: Weather station ID
+
+date: Date of observation
+
+prcp: Precipitation (tenths of mm)
+
+snow: Snowfall (mm)
+
+snwd: Snow depth (mm)
+
+tmax: Maximum temperature (tenths of degrees C)
+
+tmin: Minimum temperature (tenths of degrees C)
