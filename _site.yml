@@ -1,0 +1,11 @@
+name: "Yay internet!"
+output_dir: "."
+navbar:
+  title: "Home"
+  right:
+    - text: "Problem 1"
+      href: problem_1.html
+    - text: "Problem 2"
+      href: problem_2.html
+output:
+  html_document
