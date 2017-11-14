@@ -35,10 +35,18 @@ ny_noaa = read_csv("../data/nynoaadat.csv",
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Chart A
+### Temperature Comparison
 
-```{r}
+```{r, echo = FALSE}
+scatterplot_temp <- ny_noaa %>% 
+  mutate(tmax = as.numeric(tmax),tmin = as.numeric(tmin)) %>% 
+  filter(id %in% sample(ny_noaa$id, size = 2, replace = FALSE)) %>% 
+  ggplot(aes(x = tmax, y = tmin, group = id)) +
+  labs(title = "Maximum temperature vs. minimum temperature", 
+       x = "Maximum temperature", y = "Minimum temperature") +
+  geom_point(aes(color = year), alpha = 0.5) 
 
+ggplotly(scatterplot_temp)
 ```
 
 Column {data-width=350}
