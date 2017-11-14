@@ -55,9 +55,13 @@ Column {data-width=350}
 ### Chart B
 
 ```{r}
-ny_noaa %>% 
-  count(year) %>%
-  plot_ly(x = ~ny_noaa$year, y = ~ny_noaa$prcp, type = "bar")
+box_ggplot = 
+  ggplot(data = ny_noaa, aes(x = ny_noaa$year, y = tmax, fill = year)) +
+  geom_boxplot() +
+  theme_classic() + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+ggplotly(box_ggplot)
 ```
 
 ### Chart C
