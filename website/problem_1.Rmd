@@ -55,7 +55,9 @@ Column {data-width=350}
 ### Chart B
 
 ```{r}
-
+ny_noaa %>% 
+  count(year) %>%
+  plot_ly(x = ~ny_noaa$year, y = ~ny_noaa$prcp, type = "bar")
 ```
 
 ### Chart C
