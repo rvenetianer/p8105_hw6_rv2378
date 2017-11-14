@@ -22,14 +22,12 @@ library(stringr)
 library(viridis)
 library(plotly)
 library(hexbin)
+library(httr)
+library(jsonlite)
+library(forcats)
 ```
 
 ```{r, load and clean data, include = FALSE}
-library(tidyverse)
-library(httr)
-library(jsonlite)
-library(plotly)
-
 get_all_inspections = function(url) {
   
   all_inspections = vector("list", length = 0)
@@ -65,14 +63,14 @@ url = "https://data.cityofnewyork.us/resource/9w7m-hzhe.json"
 nyc_inspections = get_all_inspections(url) %>%
   bind_rows()
 
+nyc_inspections = janitor::clean_names(nyc_inspections)
+
 nyc_inspections$score <- as.numeric(nyc_inspections$score)
 
 # Create mean score column
 nyc_inspections <- nyc_inspections %>%
   group_by(cuisine_description) %>%
   mutate(mean_score = mean(score, na.rm = TRUE))
-
-
 ```
 
 Column {data-width=650}
@@ -81,7 +79,9 @@ Column {data-width=650}
 ### Chart A
 
 ```{r, echo = FALSE}
-plot_ly(x = ~nyc_inspections$cuisine_description, y = ~nyc_inspections$mean_score, type = "bar")
+nyc_inspections %>%
+  #mutate(cuisine_description = fctreorder(cuisine_description, mean_score)) %>%
+  plot_ly(x = ~nyc_inspections$cuisine_description, y = ~nyc_inspections$mean_score, color = nyc_inspections$cuisine_description, type = "bar")
 ```
 
 Column {data-width=350}
