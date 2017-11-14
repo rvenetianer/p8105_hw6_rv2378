@@ -25,32 +25,16 @@ library(hexbin)
 ```
 
 ```{r, load and clean data, include = FALSE}
-ny_noaa = read_csv("../data/nynoaadat.csv", 
-                   col_types = "cDiiidd") %>%
-  separate(date, into = c("year", "month", "day"))
 
-# Change variables to numeric type
-ny_noaa$snow <- as.numeric(ny_noaa$snow)
-ny_noaa$snowd <- as.numeric(ny_noaa$snowd)
-ny_noaa$snowd <- as.numeric(ny_noaa$prcp)
 ```
 
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Temperature Comparison
+### Chart A
 
 ```{r, echo = FALSE}
-set.seed(1)
-scatterplot_temp <- ny_noaa %>% 
-  mutate(tmax = as.numeric(tmax),tmin = as.numeric(tmin)) %>% 
-  filter(id %in% sample(ny_noaa$id, size = 1, replace = FALSE)) %>% 
-  ggplot(aes(x = tmax, y = tmin, group = id)) +
-  labs(title = "Maximum temperature vs. minimum temperature", 
-       x = "Maximum temperature", y = "Minimum temperature") +
-  geom_point(aes(color = year), alpha = 0.5) 
 
-ggplotly(scatterplot_temp)
 ```
 
 Column {data-width=350}
@@ -59,23 +43,13 @@ Column {data-width=350}
 ### Chart B
 
 ```{r}
-# Omit missing data and create mean tmax data set
-ny_noaa_omit <- na.omit(ny_noaa, cols = seq_along(tmax))
-tmax_mean <- ny_noaa_omit %>%
-  group_by(year) %>%
-  summarize(mean_tmax = mean(tmax))
 
-plot_ly(x = ~tmax_mean$year, y = ~tmax_mean$mean_tmax, color = ~tmax_mean$year, type = "bar")
 ```
 
 ### Chart C
 
 ```{r}
-ny_noaa %>% 
-  count(year) %>%
-  plot_ly(x = ~ny_noaa$year, y = ~ny_noaa$snwd, type = "bar")
 
-## largest snow per year
 ```
 
 Column {data-width=350}
@@ -84,5 +58,5 @@ Column {data-width=350}
 ### Chart D
 
 ```{r}
-# min temp and snow
+
 ```
