@@ -18,12 +18,10 @@ library(tidyr)
 library(knitr)
 library(ggridges)
 library(ggthemes)
-library(sas7bdat)
 library(stringr)
-library(forcats)
 library(viridis)
 library(plotly)
-library(rnoaa)
+library(hexbin)
 ```
 
 ```{r, load and clean data, include = FALSE}
@@ -63,6 +61,18 @@ ny_noaa %>%
 ### Chart C
 
 ```{r}
+ny_noaa %>% 
+  count(year) %>%
+  plot_ly(x = ~ny_noaa$year, y = ~ny_noaa$snwd, type = "bar")
 
+## largest snow per year
 ```
 
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart D
+
+```{r}
+# min temp and snow
+```
