@@ -28,6 +28,10 @@ library(hexbin)
 ny_noaa = read_csv("../data/nynoaadat.csv", 
                    col_types = "cDiiidd") %>%
   separate(date, into = c("year", "month", "day"))
+
+ny_noaa$snow <- as.numeric(ny_noaa$snow)
+ny_noaa$snowd <- as.numeric(ny_noaa$snowd)
+ny_noaa$snowd <- as.numeric(ny_noaa$prcp)
 ```
 
 Column {data-width=650}
