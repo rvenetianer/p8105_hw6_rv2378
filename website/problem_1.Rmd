@@ -71,6 +71,13 @@ nyc_inspections$score <- as.numeric(nyc_inspections$score)
 nyc_inspections <- nyc_inspections %>%
   group_by(cuisine_description) %>%
   mutate(mean_score = mean(score, na.rm = TRUE))
+
+# Subset to American restaurants only
+american_inspec <- nyc_inspections [ which(nyc_inspections$cuisine_description == 'American'), ]
+
+newdata <- mydata[ which(mydata$gender=='F' 
+& mydata$age > 65), ]
+
 ```
 
 Column {data-width=650}
@@ -79,9 +86,9 @@ Column {data-width=650}
 ### Chart A
 
 ```{r, echo = FALSE}
-nyc_inspections %>%
-  #mutate(cuisine_description = fctreorder(cuisine_description, mean_score)) %>%
-  plot_ly(x = ~nyc_inspections$cuisine_description, y = ~nyc_inspections$mean_score, color = nyc_inspections$cuisine_description, type = "bar")
+# nyc_inspections %>%
+  # mutate(cuisine_description = fctreorder(cuisine_description, mean_score)) %>%
+plot_ly(x = ~nyc_inspections$cuisine_description, y = ~nyc_inspections$mean_score, color = nyc_inspections$cuisine_description, type = "bar")
 ```
 
 Column {data-width=350}
