@@ -107,7 +107,11 @@ Column {data-width=350}
 ```{r}
 # number critical, not critical, etc
 nyc_inspections %>%
+<<<<<<< HEAD
   filter(boro != "Missing") %>% 
+=======
+  select()
+>>>>>>> 159fe834f3eb7ebb311e6c8c9238f6baa25ac88c
   ggplot(aes(x = boro, fill = critical_flag)) + 
   geom_bar()
 ```
@@ -120,7 +124,10 @@ Column {data-width=350}
 ```{r}
 # count number per grade per boro
 nyc_inspections %>%
+<<<<<<< HEAD
   filter(boro != "Missing") %>% 
+=======
+>>>>>>> 159fe834f3eb7ebb311e6c8c9238f6baa25ac88c
   filter(grade %in% c("A", "B", "C")) %>%
   ggplot(aes(x = boro, fill = grade)) + 
   geom_bar()
