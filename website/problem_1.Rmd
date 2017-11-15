@@ -91,7 +91,8 @@ Column {data-width=550}
 bakery_inspec %>%
   group_by(zipcode) %>%
   #mutate(zipcode = reorder(zipcode, score))
-  plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color =  
+
+plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color =  
             bakery_inspec$zipcode, type = "bar")
 ```
 
@@ -108,37 +109,19 @@ box_ggplot =
   geom_boxplot() +
   theme_classic() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
-
 ggplotly(box_ggplot)
 ```
 
 ### Chart C
 
 ```{r}
-# number critical, not critical, etc
-# criticaln<-nyc_inspections %>%
-#   filter(boro != "Missing") %>% 
-#   ggplot(aes(x = boro, fill = critical_flag)) + 
-#   geom_bar()
-# 
-# ggplotly(criticaln)
+nyc_inspections %>%
+  filter(boro != "Missing") %>% 
+  plot_ly(x = ~boro, y=~score, color = ~critical_flag, type = "bar")
 
-### another way? ###
-# nyc_inspections %>%
-#   filter(boro != "Missing") %>% 
-#   plot_ly(x = ~boro, y=~score, color = ~critical_flag, type = "bar")
-# 
 nyc_inspections %>%
   filter(boro != "Missing") %>%
   plot_ly(y=~score, color = ~boro, type = "box")
-
-
-##is this even interesting?##
-
-# nyc_inspections %>%
-#   filter(boro != "Missing") %>% 
-#   plot_ly(x = ~boro, y=~zipcode, color = ~critical_flag, type = "scatter")
-
 ```
 
 Column {data-width=225}
@@ -152,8 +135,5 @@ nyc_inspections %>%
   filter(boro != "Missing") %>%
   filter(grade %in% c("A", "B", "C")) %>%
   plot_ly(x = ~boro, y=~score, color = ~grade, type = "bar")
-
-
-#something with sentiments?
 ```
 
