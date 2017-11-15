@@ -87,7 +87,6 @@ Column {data-width=550}
 ### Chart A
 
 ```{r, echo = FALSE}
-<<<<<<< HEAD
 bakery_inspec %>%
   group_by(zipcode) %>%
   mutate(zipcode = reorder(zipcode, score))
@@ -99,12 +98,11 @@ bakery_inspec %>%
   mutate(zip = fct_reorder(zipcode, score))
   plot_ly(x = ~zip, y = ~bakery_inspec$score, color =  
             bakery_inspec$zipcode, type = "bar")
-=======
+
 # bakery_inspec %>%
  group_by(zipcode) %>%
   mutate(zipcode = reorder(zipcode, score)) %>%
   plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color  = bakery_inspec$zipcode, type = "bar")
->>>>>>> 20ef715c2c0ed27fd57e0bd9d540b8816725ceb2
 ```
 
 Column {data-width=225}
