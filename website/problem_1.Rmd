@@ -3,7 +3,7 @@ title: "Problem 1"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
-    vertical_layout: fill
+    vertical_layout: scroll
 ---
 
 ```{r setup, include = FALSE}
@@ -65,18 +65,15 @@ nyc_inspections = get_all_inspections(url) %>%
 nyc_inspections = janitor::clean_names(nyc_inspections)
 
 nyc_inspections$score <- as.numeric(nyc_inspections$score)
-#nyc_inspections$score <- as.integer(nyc_inspections$score)
 
-# Subset to bakeries only
-bakery_inspec <- nyc_inspections [ which(nyc_inspections$cuisine_description == 'Bakery'), ]
+# Subset to bakeries only and remove unnecessary columns
+bakery_inspec <- nyc_inspections [ which(nyc_inspections$cuisine_description == 'Bakery'), ] %>% select(-grade_date, -inspection_date, -phone, -record_date)
 
-# Remove unncessessary columns
-bakery_inspec <- bakery_inspec[-c(3,4,8,9,10,11,13,14,18)]
+
 ```
 
 
-Column {data-width=550}
------------------------------------------------------------------------
+
 
 ### Chart A
 
@@ -86,8 +83,6 @@ bakery_inspec$zipcode <- factor(bakery_inspec$zipcode, levels = unique(bakery_in
 plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color = bakery_inspec$zipcode, type = "bar")
 ```
 
-Column {data-width=225}
------------------------------------------------------------------------
 
 ### Chart B
 
@@ -96,30 +91,24 @@ Column {data-width=225}
 wahi_bakery <- bakery_inspec %>%
   group_by(dba) %>%
   filter(zipcode %in% c("10031", "10032", "10033", "10034", "10040"))
+
+## make plot ##
 ```
 
 ### Chart C
 
-```{r}
+```{r bar plot criticals in each boro}
 nyc_inspections %>%
   filter(boro != "Missing") %>% 
   plot_ly(x = ~boro, y=~score, color = ~critical_flag, type = "bar")
-
-nyc_inspections %>%
-  filter(boro != "Missing") %>%
-  plot_ly(y=~score, color = ~boro, type = "box")
 ```
 
-Column {data-width=225}
------------------------------------------------------------------------
 
 ### Chart D
 
-```{r}
-#count number per grade per boro
+```{r box plot score in each boro}
 nyc_inspections %>%
   filter(boro != "Missing") %>%
-  filter(grade %in% c("A", "B", "C")) %>%
-  plot_ly(x = ~boro, y=~score, color = ~grade, type = "bar")
+  plot_ly(y=~score, color = ~boro, type = "box")
 ```
 
