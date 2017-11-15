@@ -93,17 +93,6 @@ bakery_inspec %>%
   #mutate(zipcode = reorder(zipcode, score))
   plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color =  
             bakery_inspec$zipcode, type = "bar")
-  
-#bakery_inspec %>%
-  #group_by(zipcode) %>%
-  #mutate(zip = fct_reorder(zipcode, score))
-  #plot_ly(x = ~zip, y = ~bakery_inspec$score, color =  
-            #bakery_inspec$zipcode, type = "bar")
-
-# bakery_inspec %>%
- #group_by(zipcode) %>%
-  #mutate(zipcode = reorder(zipcode, score)) %>%
-  #plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color  = bakery_inspec$zipcode, type = "bar")
 ```
 
 Column {data-width=225}
