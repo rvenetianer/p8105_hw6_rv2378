@@ -77,8 +77,7 @@ bakery_inspec <- nyc_inspections [ which(nyc_inspections$cuisine_description == 
 # Create mean score column by boro
 bakery_inspec <- bakery_inspec %>%
   group_by(zipcode) %>%
-  mutate(mean_score_zip = mean(score, na.rm = TRUE)) #%>% 
-  filter(boro != "Missing")
+  mutate(mean_score_zip = mean(score, na.rm = TRUE))
 ```
 
 Column {data-width=650}
@@ -88,7 +87,7 @@ Column {data-width=650}
 
 ```{r, echo = FALSE}
 bakery_inspec %>%
-  mutate(zipcode = fct_reorder(zipcode, mean_score_zip)) %>%
+  # mutate(zipcode = fct_reorder(zipcode, mean_score_zip)) %>%
   plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$mean_score_zip, color =  
             bakery_inspec$zipcode, type = "bar")
 ```
@@ -107,11 +106,8 @@ Column {data-width=350}
 ```{r}
 # number critical, not critical, etc
 nyc_inspections %>%
-<<<<<<< HEAD
   filter(boro != "Missing") %>% 
-=======
-  select()
->>>>>>> 159fe834f3eb7ebb311e6c8c9238f6baa25ac88c
+  #select() %>%
   ggplot(aes(x = boro, fill = critical_flag)) + 
   geom_bar()
 ```
@@ -124,10 +120,7 @@ Column {data-width=350}
 ```{r}
 # count number per grade per boro
 nyc_inspections %>%
-<<<<<<< HEAD
   filter(boro != "Missing") %>% 
-=======
->>>>>>> 159fe834f3eb7ebb311e6c8c9238f6baa25ac88c
   filter(grade %in% c("A", "B", "C")) %>%
   ggplot(aes(x = boro, fill = grade)) + 
   geom_bar()
