@@ -21,3 +21,4 @@ httr
 jsonlite
 forcats
 bindrcpp
+tidytext
