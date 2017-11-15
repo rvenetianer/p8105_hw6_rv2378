@@ -87,8 +87,9 @@ Column {data-width=650}
 
 ```{r, echo = FALSE}
 bakery_inspec %>%
-  # mutate(zipcode = fct_reorder(zipcode, mean_score_zip)) %>%
-  plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$mean_score_zip, color =  
+  group_by(zipcode) %>%
+  mutate(zipcode = reorder(zipcode, score))
+  plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color =  
             bakery_inspec$zipcode, type = "bar")
 ```
 
@@ -98,7 +99,15 @@ Column {data-width=350}
 ### Chart B
 
 ```{r}
+box_ggplot = 
+  bakery_inspec %>%
+  mutate(boro = fct_reorder(boro, score)) %>% 
+  ggplot(aes(x = boro, y = score, fill = boro)) +
+  geom_boxplot() +
+  theme_classic() + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
+ggplotly(box_ggplot)
 ```
 
 ### Chart C
