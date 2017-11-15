@@ -23,6 +23,7 @@ library(hexbin)
 library(httr)
 library(jsonlite)
 library(forcats)
+library(tidytext)
 ```
 
 ```{r, load and clean data, include = FALSE, cache=TRUE}
@@ -80,12 +81,13 @@ bakery_inspec <- bakery_inspec %>%
   mutate(mean_score_zip = mean(score, na.rm = TRUE))
 ```
 
-Column {data-width=650}
+Column {data-width=550}
 -----------------------------------------------------------------------
 
 ### Chart A
 
 ```{r, echo = FALSE}
+<<<<<<< HEAD
 bakery_inspec %>%
   group_by(zipcode) %>%
   mutate(zipcode = reorder(zipcode, score))
@@ -97,20 +99,26 @@ bakery_inspec %>%
   mutate(zip = fct_reorder(zipcode, score))
   plot_ly(x = ~zip, y = ~bakery_inspec$score, color =  
             bakery_inspec$zipcode, type = "bar")
+=======
+# bakery_inspec %>%
+ group_by(zipcode) %>%
+  mutate(zipcode = reorder(zipcode, score)) %>%
+  plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color  = bakery_inspec$zipcode, type = "bar")
+>>>>>>> 20ef715c2c0ed27fd57e0bd9d540b8816725ceb2
 ```
 
-Column {data-width=350}
+Column {data-width=225}
 -----------------------------------------------------------------------
 
 ### Chart B
 
 ```{r}
-box_ggplot = 
+box_ggplot =
   bakery_inspec %>%
-  mutate(boro = fct_reorder(boro, score)) %>% 
+  mutate(boro = fct_reorder(boro, score)) %>%
   ggplot(aes(x = boro, y = score, fill = boro)) +
   geom_boxplot() +
-  theme_classic() + 
+  theme_classic() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 ggplotly(box_ggplot)
@@ -120,23 +128,44 @@ ggplotly(box_ggplot)
 
 ```{r}
 # number critical, not critical, etc
+# criticaln<-nyc_inspections %>%
+#   filter(boro != "Missing") %>% 
+#   ggplot(aes(x = boro, fill = critical_flag)) + 
+#   geom_bar()
+# 
+# ggplotly(criticaln)
+
+### another way? ###
+# nyc_inspections %>%
+#   filter(boro != "Missing") %>% 
+#   plot_ly(x = ~boro, y=~score, color = ~critical_flag, type = "bar")
+# 
 nyc_inspections %>%
-  filter(boro != "Missing") %>% 
-  #select() %>%
-  ggplot(aes(x = boro, fill = critical_flag)) + 
-  geom_bar()
+  filter(boro != "Missing") %>%
+  plot_ly(y=~score, color = ~boro, type = "box")
+
+
+##is this even interesting?##
+
+# nyc_inspections %>%
+#   filter(boro != "Missing") %>% 
+#   plot_ly(x = ~boro, y=~zipcode, color = ~critical_flag, type = "scatter")
+
 ```
 
-Column {data-width=350}
+Column {data-width=225}
 -----------------------------------------------------------------------
 
 ### Chart D
 
 ```{r}
-# count number per grade per boro
+count number per grade per boro
 nyc_inspections %>%
-  filter(boro != "Missing") %>% 
+  filter(boro != "Missing") %>%
   filter(grade %in% c("A", "B", "C")) %>%
-  ggplot(aes(x = boro, fill = grade)) + 
-  geom_bar()
+  plot_ly(x = ~boro, y=~score, color = ~grade, type = "bar")
+
+
+#something with sentiments?
 ```
+
