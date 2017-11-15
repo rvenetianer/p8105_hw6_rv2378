@@ -81,6 +81,7 @@ bakery_inspec <- bakery_inspec %>%
   mutate(mean_score_zip = mean(score, na.rm = TRUE))
 ```
 
+
 Column {data-width=550}
 -----------------------------------------------------------------------
 
