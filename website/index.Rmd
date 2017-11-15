@@ -1,14 +1,40 @@
 ---
-title: "The National Oceanic and Atmospheric Association (NOAA)"
+title: "NYC Bakery Inspections"
 ---
 
-### NYC Inspections
+### Subset of: "DOHMH New York City Restaurant Inspection Results""
 
 #### Data description
 
-The dataset is a subset of all NYC restaurants, including only those categorized as a bakery.
+The dataset is a subset of all NYC restaurants, including only those categorized as a bakery by cuisine description. Data were accessed repeatedly and the report is regularly updated. The most recent update was November 17, 2017. The dataset contains approximately 12,000 observations with 18 variables.
+
+##### Relevant variable descriptions
+
+action: Action of each inspection
+
+boro: Borough in which the restaurant is located
+
+critical_flag: Indicates if violation is critical or not
+
+cuisine_description: Restaurant cuisine (note: this dataset includes bakeries only)
+
+dba: Restaurant name
+
+score: Total score of each inspection
+
+violation_description: Description associated with each inspection
+
+zipcode: Zipcode at which the restaurant is located
+
+grade: Grade of each inspection
 
 
-##### Variable descriptions
+##### Additional NYC public data can be accessed <a href="https://opendata.cityofnewyork.us">here</a>.
+
+
+
+
+
+
 
 
