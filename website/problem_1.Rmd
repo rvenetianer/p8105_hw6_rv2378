@@ -65,20 +65,13 @@ nyc_inspections = get_all_inspections(url) %>%
 nyc_inspections = janitor::clean_names(nyc_inspections)
 
 nyc_inspections$score <- as.numeric(nyc_inspections$score)
-nyc_inspections$score <- as.integer(nyc_inspections$score)
-
-# Create mean score column by boro
-nyc_inspections <- nyc_inspections %>%
-  group_by(boro) %>%
-  mutate(mean_score_boro = mean(score, na.rm = TRUE))
+#nyc_inspections$score <- as.integer(nyc_inspections$score)
 
 # Subset to bakeries only
 bakery_inspec <- nyc_inspections [ which(nyc_inspections$cuisine_description == 'Bakery'), ]
 
-# Create mean score column by boro
-bakery_inspec <- bakery_inspec %>%
-  group_by(zipcode) %>%
-  mutate(mean_score_zip = mean(score, na.rm = TRUE))
+# Remove unncessessary columns
+bakery_inspec <- bakery_inspec[-c(3,4,8,9,10,11,13,14,18)]
 ```
 
 
@@ -88,12 +81,9 @@ Column {data-width=550}
 ### Chart A
 
 ```{r, echo = FALSE}
-bakery_inspec %>%
-  group_by(zipcode) %>%
-  #mutate(zipcode = reorder(zipcode, score))
-
-plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color =  
-            bakery_inspec$zipcode, type = "bar")
+bakery_inspec$zipcode <- factor(bakery_inspec$zipcode, levels = unique(bakery_inspec$zipcode)[order(bakery_inspec$score, decreasing = FALSE)])
+  
+plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color = bakery_inspec$zipcode, type = "bar")
 ```
 
 Column {data-width=225}
@@ -102,14 +92,10 @@ Column {data-width=225}
 ### Chart B
 
 ```{r}
-box_ggplot =
-  bakery_inspec %>%
-  mutate(boro = fct_reorder(boro, score)) %>%
-  ggplot(aes(x = boro, y = score, fill = boro)) +
-  geom_boxplot() +
-  theme_classic() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
-ggplotly(box_ggplot)
+# Plot scores for WaHi/Inwood bakeries
+wahi_bakery <- bakery_inspec %>%
+  group_by(dba) %>%
+  filter(zipcode %in% c("10031", "10032", "10033", "10034", "10040"))
 ```
 
 ### Chart C
