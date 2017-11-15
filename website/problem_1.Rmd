@@ -23,6 +23,7 @@ library(hexbin)
 library(httr)
 library(jsonlite)
 library(forcats)
+library(tidytext)
 ```
 
 ```{r, load and clean data, include = FALSE, cache=TRUE}
@@ -87,10 +88,9 @@ Column {data-width=650}
 
 ```{r, echo = FALSE}
 bakery_inspec %>%
-  group_by(zipcode) %>%
-  mutate(zipcode = reorder(zipcode, score))
-  plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color =  
-            bakery_inspec$zipcode, type = "bar")
+ group_by(zipcode) %>%
+  mutate(zipcode = reorder(zipcode, score)) %>% 
+  plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color  = bakery_inspec$zipcode, type = "bar")
 ```
 
 Column {data-width=350}
@@ -114,11 +114,29 @@ ggplotly(box_ggplot)
 
 ```{r}
 # number critical, not critical, etc
-nyc_inspections %>%
+criticaln<-nyc_inspections %>%
   filter(boro != "Missing") %>% 
-  #select() %>%
   ggplot(aes(x = boro, fill = critical_flag)) + 
   geom_bar()
+
+ggplotly(criticaln)
+
+### another way? ###
+nyc_inspections %>%
+  filter(boro != "Missing") %>% 
+  plot_ly(x = ~boro, y=~score, color = ~critical_flag, type = "bar")
+
+nyc_inspections %>%
+  filter(boro != "Missing") %>% 
+  plot_ly(y=~score, color = ~boro, type = "box")
+
+
+##is this even interesting?##
+
+nyc_inspections %>%
+  filter(boro != "Missing") %>% 
+  plot_ly(x = ~boro, y=~zipcode, color = ~critical_flag, type = "scatter")
+
 ```
 
 Column {data-width=350}
@@ -131,6 +149,6 @@ Column {data-width=350}
 nyc_inspections %>%
   filter(boro != "Missing") %>% 
   filter(grade %in% c("A", "B", "C")) %>%
-  ggplot(aes(x = boro, fill = grade)) + 
-  geom_bar()
+  plot_ly(x = ~boro, y=~score, color = ~grade, type = "bar")
 ```
+
