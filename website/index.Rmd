@@ -2,11 +2,11 @@
 title: "The National Oceanic and Atmospheric Association (NOAA)"
 ---
 
-### Background to the NOAA data set
+### NYC Inspections
 
-#### Data collection
+#### Data description
 
-Access date: August 15, 2017
+The dataset is a subset of all NYC restaurants, including only those categorized as a bakery.
 
 
 ##### Variable descriptions
