@@ -3,6 +3,7 @@ title: "Problem 2"
 output: 
   flexdashboard::flex_dashboard:
     orientation: row
+    source_code: embed
   runtime: shiny
 ---
 
