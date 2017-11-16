@@ -39,40 +39,53 @@ Column {.sidebar}
 -----------------------------------------------------------------------
 This `flexdashboard` with Shiny was made for Homework 6 of [Jeff Goldsmith's Data Science I class](http://jeffgoldsmith.com/DSI/homework_6.html) in the Department of Biostatistics at Columbia University. It was created by [Kaitlin Maciejewski](https://github.com/k-maciejewski) and [Rebecca Venetianer](https://github.com/rvenetianer).
 
-We will add widgets here.
 
-(for score and critical?)
+```{r widgets}
+
+boros = bakery_inspec %>% distinct(boro) %>% pull()
+
+# selectInput widget
+selectInput("boro_choice", label = h3("Select Borough"),
+            choices = boros, selected = "Manhattan")
+
+hr()
+
+renderUI({
+  
+# set min and max hour of the day
+min_score = bakery_inspec %>% filter(boro == input$boro_choice) %>% select(score) %>% filter(!is.na(score)) %>%  min()
+
+max_score = bakery_inspec %>% filter(boro == input$boro_choice) %>% select(score) %>% filter(!is.na(score)) %>%  max()
+
+# sliderInput widget
+sliderInput("score_choice", label = h3("Choose score"), min = min_score, 
+        max = max_score, value = c(0, 93), step = 1)
+
+})
+
+hr()
+
+# zipcode = bakery_inspec %>% distinct(zipcode) %>% pull()
+# 
+# # radioButtons widget
+# radioButtons("Zipcode", label = h3("Choose zipcode"),
+#     choices = zipcode, 
+#     selected = "10011")
+```
 
 Row {.tabset .tabset-fade } 
 -----------------------------------------------------------------------
 
-### Chart A
-
-```{r, echo = FALSE}
-renderPlotly({ 
-  
-  # Reorder???
-bakery_inspec$zipcode <- factor(bakery_inspec$zipcode, levels = unique(bakery_inspec$zipcode)[order(bakery_inspec$score, decreasing = FALSE)])
-
-# Plot of score by zipcode
-plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color = bakery_inspec$zipcode, type = "bar")
-
-})
-```
-
-
-### Chart B
+### Inspection Scores Based on Inspection Type in Washington Heights and Inwood (Manhattan)
 
 ```{r}
 renderPlotly({
   
   # Plot scores for WaHi/Inwood bakeries
-wahi_bakery <- bakery_inspec %>%
+bakery_inspec %>% filter(boro == input$boro_choice, score %in% input$score_choice[1]:input$score_choice[2]) %>%
   group_by(dba) %>%
-  filter(zipcode %in% c("10031", "10032", "10033", "10034", "10040"), critical_flag == 
-           "Critical")
-
-plot_ly(x = ~wahi_bakery$inspection_type, y = ~wahi_bakery$score, color = ~wahi_bakery$inspection_type, type = "bar")
+  filter(zipcode %in% c("10031", "10032", "10033", "10034", "10040"), critical_flag == "Critical") %>% 
+plot_ly(x = ~inspection_type, y = ~score, color = ~inspection_type, type = "bar")
 
 })
 ```
@@ -83,20 +96,20 @@ plot_ly(x = ~wahi_bakery$inspection_type, y = ~wahi_bakery$score, color = ~wahi_
 renderPlotly({
   
   bakery_inspec %>%
-  filter(boro != "Missing") %>% 
+  filter(boro != "Missing") %>% filter(boro == input$boro_choice, score %in% input$score_choice[1]:input$score_choice[2]) %>% 
   plot_ly(x = ~boro, y=~score, color = ~critical_flag, type = "bar")
   
 })
 ```
 
 
-### Bakery Scores per Borough
+### Inspection Score Distribution per Borough
 
 ```{r box plot score in each boro}
 renderPlotly({
   
   bakery_inspec %>%
-  filter(boro != "Missing") %>%
+  filter(boro != "Missing") %>% filter(boro == input$boro_choice, score %in% input$score_choice[1]:input$score_choice[2]) %>% 
   plot_ly(y=~score, color = ~boro, type = "box")
   
 })
