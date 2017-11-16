@@ -5,6 +5,6 @@ account: kmaciejewski
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 236360
-bundleId: 1079483
+bundleId: 1079769
 url: https://kmaciejewski.shinyapps.io/hw_6/
-when: 1510858322.30045
+when: 1510866987.40933
