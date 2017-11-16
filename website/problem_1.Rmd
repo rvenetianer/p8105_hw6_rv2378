@@ -73,7 +73,6 @@ bakery_inspec <- nyc_inspections [ which(nyc_inspections$cuisine_description == 
 
 ```
 
-
 ### Chart A
 
 ```{r, echo = FALSE}
@@ -91,9 +90,10 @@ plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color = bakery_ins
 # Plot scores for WaHi/Inwood bakeries
 wahi_bakery <- bakery_inspec %>%
   group_by(dba) %>%
-  filter(zipcode %in% c("10031", "10032", "10033", "10034", "10040"))
+  filter(zipcode %in% c("10031", "10032", "10033", "10034", "10040"), critical_flag == 
+           "Critical")
 
-## make plot ##
+#plot_ly(x = ~wahi_bakery$dba, y = ~wahi_bakery$score, color = bakery_inspec$dba, type = "bar")
 ```
 
 ### Chart C
