@@ -2,8 +2,7 @@
 title: "Problem 1"
 output: 
   flexdashboard::flex_dashboard:
-    orientation: columns
-    vertical_layout: scroll
+    orientation: rows
 ---
 
 ```{r setup, include = FALSE}
@@ -73,7 +72,10 @@ bakery_inspec <- nyc_inspections [ which(nyc_inspections$cuisine_description == 
 
 ```
 
-### Chart A
+Row 
+-------------------------------------
+    
+### Chart 1
 
 ```{r, echo = FALSE}
 # Reorder???
@@ -83,8 +85,10 @@ bakery_inspec$zipcode <- factor(bakery_inspec$zipcode, levels = unique(bakery_in
 plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color = bakery_inspec$zipcode, type = "bar")
 ```
 
-
-### Chart B
+Row {.tabset .tabset-fade}
+-------------------------------------
+   
+### Chart 2
 
 ```{r}
 # Plot scores for WaHi/Inwood bakeries
@@ -93,11 +97,11 @@ wahi_bakery <- bakery_inspec %>%
   filter(zipcode %in% c("10031", "10032", "10033", "10034", "10040"), critical_flag == 
            "Critical")
 
-# Plot isn't working??
-# plot_ly(x = ~wahi_bakery$inspection_type, y = ~wahi_bakery$score, color = bakery_inspec$inspection_type, type = "bar")
+plot_ly(x = ~wahi_bakery$inspection_type, y = ~wahi_bakery$score, 
+        color = ~wahi_bakery$inspection_type, type = "bar")
 ```
 
-### Chart C
+### Chart 3
 
 ```{r bar plot criticals in each boro}
 nyc_inspections %>%
@@ -106,7 +110,7 @@ nyc_inspections %>%
 ```
 
 
-### Chart D
+### Chart 4
 
 ```{r box plot score in each boro}
 nyc_inspections %>%
