@@ -80,7 +80,7 @@ plot_ly(x = ~wahi_bakery$inspection_type, y = ~wahi_bakery$score, color = ~wahi_
 ```{r bar plot criticals in each boro}
 renderPlotly({
   
-  nyc_inspections %>%
+  bakery_inspec %>%
   filter(boro != "Missing") %>% 
   plot_ly(x = ~boro, y=~score, color = ~critical_flag, type = "bar")
   
@@ -93,7 +93,7 @@ renderPlotly({
 ```{r box plot score in each boro}
 renderPlotly({
   
-  nyc_inspections %>%
+  bakery_inspec %>%
   filter(boro != "Missing") %>%
   plot_ly(y=~score, color = ~boro, type = "box")
   
