@@ -6,6 +6,6 @@ navbar:
     - text: "Problem 1"
       href: problem_1.html
     - text: "Problem 2"
-      href: https://kmaciejewski.shinyapps.io/hw_6/
+      href: https://kmaciejewski.shinyapps.io/shiny_app/
 output:
   html_document
