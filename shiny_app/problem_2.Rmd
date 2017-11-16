@@ -28,52 +28,6 @@ library(tidytext)
 library(shiny)
 ```
 
-```{r, load and clean data, include = FALSE}
-#get_all_inspections = function(url) {
-  
-  #all_inspections = vector("list", length = 0)
-  
-  #loop_index = 1
-  #chunk_size = 50000
-  #DO_NEXT = TRUE
-  
-  #while (DO_NEXT) {
-    #message("Getting data, page ", loop_index)
-    
-    #all_inspections[[loop_index]] = 
-      #GET(url,
-          #query = list(`$order` = "zipcode",
-                       #`$limit` = chunk_size,
-                       #`$offset` = as.integer((loop_index - 1) * chunk_size)
-         # )
-    #  ) %>%
-   #   content("text") %>%
-    #  fromJSON() %>%
-   #   as_tibble()
-    
-  #  DO_NEXT = dim(all_inspections[[loop_index]])[1] == chunk_size
-#    loop_index = loop_index + 1
-#  }
-  
-#  all_inspections
-  
-#}
-
-#url = "https://data.cityofnewyork.us/resource/9w7m-hzhe.json"
-
-#nyc_inspections = get_all_inspections(url) %>%
-  #bind_rows()
-
-#nyc_inspections = janitor::clean_names(nyc_inspections)
-
-# nyc_inspections$score <- as.numeric(nyc_inspections$score)
-
-# Subset to bakeries only
-# bakery_inspec <- nyc_inspections [ which(nyc_inspections$cuisine_description == 'Bakery'), ] %>% select(-grade_date, -inspection_date, -phone, -record_date)
-
-# Create mean score by zipcode column
-
-```
 
 ```{r, load csv, include = FALSE}
 # Load csv of subsetted data
@@ -83,8 +37,9 @@ bakery_inspec$score <- as.numeric(bakery_inspec$score)
 
 Column {.sidebar}
 -----------------------------------------------------------------------
-This `flexdashboard` with Shiny was made for Homework 6 of [Jeff Goldsmith's Data Science I class](http://jeffgoldsmith.com/DSI/homework_6.html) in the Department of Biostatistics at Columbia University. 
+This `flexdashboard` with Shiny was made for Homework 6 of [Jeff Goldsmith's Data Science I class](http://jeffgoldsmith.com/DSI/homework_6.html) in the Department of Biostatistics at Columbia University. It was created by [Kaitlin Maciejewski](https://github.com/k-maciejewski) and [Rebecca Venetianer](https://github.com/rvenetianer).
 
+We will add widgets here.
 
 Row {.tabset .tabset-fade } 
 -----------------------------------------------------------------------
