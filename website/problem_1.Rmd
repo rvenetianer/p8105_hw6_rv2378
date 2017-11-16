@@ -71,7 +71,7 @@ bakery_inspec <- nyc_inspections [ which(nyc_inspections$cuisine_description == 
 
 
 # Remove unncessessary columns
-bakery_inspec <- bakery_inspec[-c(1,3,9,10,12,13,15)]
+#bakery_inspec <- bakery_inspec[-c(1,3,9,10,12,13,15)]
 
 # Create mean score by zipcode column
 
