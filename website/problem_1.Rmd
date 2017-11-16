@@ -72,16 +72,6 @@ bakery_inspec %>%
 
 ```{r box plot score in each boro}
 bakery_inspec %>%
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-bakery_inspec %>%
-=======
-bakery_inspe %>%
->>>>>>> b36dfa85125b26e69707df1e672a1fef28b3e7de
->>>>>>> 595b6c7410eb5f06d1d84d0e9d89f90d2de1006c
-=======
->>>>>>> 00f96266bbc6456e9e560089b263fd5f2e6dd001
   filter(boro != "Missing") %>%
   plot_ly(y=~score, color = ~boro, type = "box")
 ```
