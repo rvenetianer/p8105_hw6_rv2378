@@ -70,17 +70,12 @@ nyc_inspections$score <- as.numeric(nyc_inspections$score)
 bakery_inspec <- nyc_inspections [ which(nyc_inspections$cuisine_description == 'Bakery'), ] %>% select(-grade_date, -inspection_date, -phone, -record_date)
 
 
-<<<<<<< HEAD
 # Remove unncessessary columns
 bakery_inspec <- bakery_inspec[-c(1,3,9,10,12,13,15)]
 
 # Create mean score by zipcode column
 
-=======
->>>>>>> fb32e66cf5924b563badb924a9d5a6364e4f03cc
 ```
-
-
 
 
 ### Chart A
