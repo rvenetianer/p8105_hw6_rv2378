@@ -2,7 +2,7 @@
 title: "Problem 2"
 output: 
   flexdashboard::flex_dashboard:
-    orientation: row
+    orientation: rows
     source_code: embed
   runtime: shiny
 ---
@@ -25,6 +25,7 @@ library(httr)
 library(jsonlite)
 library(forcats)
 library(tidytext)
+library(shiny)
 ```
 
 ```{r, load and clean data, include = FALSE, cache=TRUE}
@@ -74,44 +75,68 @@ bakery_inspec <- nyc_inspections [ which(nyc_inspections$cuisine_description == 
 
 ```
 
+
+Column {.sidebar}
+-----------------------------------------------------------------------
+This `flexdashboard` with Shiny was made for Homework 6 of [Jeff Goldsmith's Data Science I class](http://jeffgoldsmith.com/DSI/homework_6.html) in the Department of Biostatistics at Columbia University. 
+
+
+Row {.tabset .tabset-fade } 
+-----------------------------------------------------------------------
+
 ### Chart A
 
 ```{r, echo = FALSE}
-# Reorder???
+renderPlotly({ 
+  
+  # Reorder???
 bakery_inspec$zipcode <- factor(bakery_inspec$zipcode, levels = unique(bakery_inspec$zipcode)[order(bakery_inspec$score, decreasing = FALSE)])
 
 # Plot of score by zipcode
 plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color = bakery_inspec$zipcode, type = "bar")
+
+)}
 ```
 
 
 ### Chart B
 
 ```{r}
-# Plot scores for WaHi/Inwood bakeries
+renderPlotly({
+  
+  # Plot scores for WaHi/Inwood bakeries
 wahi_bakery <- bakery_inspec %>%
   group_by(dba) %>%
   filter(zipcode %in% c("10031", "10032", "10033", "10034", "10040"), critical_flag == 
            "Critical")
 
-# Plot isn't working??
-# plot_ly(x = ~wahi_bakery$inspection_type, y = ~wahi_bakery$score, color = bakery_inspec$inspection_type, type = "bar")
+plot_ly(x = ~wahi_bakery$inspection_type, y = ~wahi_bakery$score, color = ~wahi_bakery$inspection_type, type = "bar")
+
+)}
 ```
 
 ### Chart C
 
 ```{r bar plot criticals in each boro}
-nyc_inspections %>%
+renderPlotly({
+  
+  nyc_inspections %>%
   filter(boro != "Missing") %>% 
   plot_ly(x = ~boro, y=~score, color = ~critical_flag, type = "bar")
+  
+)}
 ```
 
 
 ### Chart D
 
 ```{r box plot score in each boro}
-nyc_inspections %>%
+renderPlotly({
+  
+  nyc_inspections %>%
   filter(boro != "Missing") %>%
   plot_ly(y=~score, color = ~boro, type = "box")
+  
+)}
 ```
 
