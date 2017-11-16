@@ -72,6 +72,9 @@ bakery_inspec <- nyc_inspections [ which(nyc_inspections$cuisine_description == 
 
 # Remove unncessessary columns
 bakery_inspec <- bakery_inspec[-c(1,3,9,10,12,13,15)]
+
+# Create mean score by zipcode column
+
 ```
 
 
@@ -84,7 +87,7 @@ Column {data-width=550}
 # Reorder???
 bakery_inspec$zipcode <- factor(bakery_inspec$zipcode, levels = unique(bakery_inspec$zipcode)[order(bakery_inspec$score, decreasing = FALSE)])
 
-#
+# Plot of score by zipcode
 plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color = bakery_inspec$zipcode, type = "bar")
 ```
 
