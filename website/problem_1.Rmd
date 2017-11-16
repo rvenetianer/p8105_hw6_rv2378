@@ -93,7 +93,8 @@ wahi_bakery <- bakery_inspec %>%
   filter(zipcode %in% c("10031", "10032", "10033", "10034", "10040"), critical_flag == 
            "Critical")
 
-#plot_ly(x = ~wahi_bakery$dba, y = ~wahi_bakery$score, color = bakery_inspec$dba, type = "bar")
+# Plot isn't working??
+# plot_ly(x = ~wahi_bakery$inspection_type, y = ~wahi_bakery$score, color = bakery_inspec$inspection_type, type = "bar")
 ```
 
 ### Chart C
