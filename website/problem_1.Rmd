@@ -71,7 +71,11 @@ bakery_inspec %>%
 ### Chart 4
 
 ```{r box plot score in each boro}
+<<<<<<< HEAD
 bakery_inspec %>%
+=======
+bakery_inspe %>%
+>>>>>>> b36dfa85125b26e69707df1e672a1fef28b3e7de
   filter(boro != "Missing") %>%
   plot_ly(y=~score, color = ~boro, type = "box")
 ```
