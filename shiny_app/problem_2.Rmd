@@ -41,6 +41,8 @@ This `flexdashboard` with Shiny was made for Homework 6 of [Jeff Goldsmith's Dat
 
 We will add widgets here.
 
+(for score and critical?)
+
 Row {.tabset .tabset-fade } 
 -----------------------------------------------------------------------
 
@@ -75,7 +77,7 @@ plot_ly(x = ~wahi_bakery$inspection_type, y = ~wahi_bakery$score, color = ~wahi_
 })
 ```
 
-### Chart C
+### Bakeries with Critical Levels per Borough
 
 ```{r bar plot criticals in each boro}
 renderPlotly({
@@ -88,7 +90,7 @@ renderPlotly({
 ```
 
 
-### Chart D
+### Bakery Scores per Borough
 
 ```{r box plot score in each boro}
 renderPlotly({
