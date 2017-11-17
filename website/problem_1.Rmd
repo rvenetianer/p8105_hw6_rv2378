@@ -42,7 +42,10 @@ Row {.tabset .tabset-fade}
 bakery_inspec$zipcode <- factor(bakery_inspec$zipcode, levels = unique(bakery_inspec$zipcode)[order(bakery_inspec$score, decreasing = FALSE)])
 
 # Plot of score by zipcode
-plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color = bakery_inspec$zipcode, type = "bar")
+bakery_inspec %>%
+  plot_ly(x = ~zipcode, y = ~score, color = 
+            ~zipcode, type = "bar") %>%
+  layout(title = "Average inspection score for each zipcode")
 ```
 
    
@@ -54,9 +57,11 @@ wahi_bakery <- bakery_inspec %>%
   group_by(dba) %>%
   filter(zipcode %in% c("10031", "10032", "10033", "10034", "10040"), critical_flag == 
            "Critical")
-
-plot_ly(x = ~wahi_bakery$inspection_type, y = ~wahi_bakery$score, 
-        color = ~wahi_bakery$inspection_type, type = "bar")
+wahi_bakery %>%
+  plot_ly(x = ~inspection_type, y = ~score, 
+        color = ~inspection_type, type = "bar") %>%
+  layout(title = "Average inspection score categorized by inspection type for Washington 
+         Heights/Inwood Bakeries")
 ```
 
 ### Bakeries with Critical Levels per Borough
