@@ -82,10 +82,13 @@ Row {.tabset .tabset-fade }
 renderPlotly({
   
   # Plot scores for WaHi/Inwood bakeries
-bakery_inspec %>% filter(boro == input$boro_choice, score %in% input$score_choice[1]:input$score_choice[2]) %>%
-  group_by(dba) %>%
-  filter(zipcode %in% c("10031", "10032", "10033", "10034", "10040"), critical_flag == "Critical") %>% 
-plot_ly(x = ~inspection_type, y = ~score, color = ~inspection_type, type = "bar")
+bakery_inspec %>% filter(boro == input$boro_choice, score %in% 
+                           input$score_choice[1]:input$score_choice[2]) %>%
+  filter(zipcode %in% c("10031", "10032", "10033", "10034", "10040"), critical_flag == 
+           "Critical") %>% 
+plot_ly(x = ~inspection_type, y = ~score, color = ~inspection_type, type = "bar") %>%
+  layout(title = "Average inspection score categorized by inspection type for Washington 
+         Heights/Inwood Bakeries - Critical", showlegend = FALSE)
 
 })
 ```

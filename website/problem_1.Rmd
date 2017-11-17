@@ -61,7 +61,7 @@ wahi_bakery %>%
   plot_ly(x = ~inspection_type, y = ~score, 
         color = ~inspection_type, type = "bar") %>%
   layout(title = "Average inspection score categorized by inspection type for Washington 
-         Heights/Inwood Bakeries")
+         Heights/Inwood Bakeries - Critical", showlegend = FALSE)
 ```
 
 ### Bakeries with Critical Levels per Borough
