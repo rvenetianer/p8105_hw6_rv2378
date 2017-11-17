@@ -35,10 +35,10 @@ bakery_inspec$score <- as.numeric(bakery_inspec$score)
 Row {.tabset .tabset-fade}
 -------------------------------------
     
-### Chart 1
+### Inspection Scores by Zipcode
 
 ```{r, echo = FALSE}
-# Reorder???
+# Reorder
 bakery_inspec$zipcode <- factor(bakery_inspec$zipcode, levels = unique(bakery_inspec$zipcode)[order(bakery_inspec$score, decreasing = FALSE)])
 
 # Plot of score by zipcode
@@ -46,7 +46,7 @@ plot_ly(x = ~bakery_inspec$zipcode, y = ~bakery_inspec$score, color = bakery_ins
 ```
 
    
-### Chart 2
+### Inspection Scores by Inspection Type
 
 ```{r}
 # Plot scores for WaHi/Inwood bakeries
@@ -68,7 +68,7 @@ bakery_inspec %>%
 ```
 
 
-### Bakery Scores per Borough
+### Inspection Scores per Borough
 
 ```{r box plot score in each boro}
 bakery_inspec %>%
