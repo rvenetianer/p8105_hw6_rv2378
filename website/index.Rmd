@@ -32,7 +32,8 @@ grade: Grade of each inspection
 ##### This dataset as well as additional NYC public data can be accessed <a href="https://opendata.cityofnewyork.us">here</a>.
 
 
-
+##### Collaborators:
+Rebecca Venetianer, Kaitlin Macejewski
 
 
 
