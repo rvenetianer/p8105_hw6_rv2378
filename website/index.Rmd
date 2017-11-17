@@ -29,7 +29,7 @@ zipcode: Zipcode at which the restaurant is located
 grade: Grade of each inspection
 
 
-##### Additional NYC public data can be accessed <a href="https://opendata.cityofnewyork.us">here</a>.
+##### This dataset as well as additional NYC public data can be accessed <a href="https://opendata.cityofnewyork.us">here</a>.
 
 
 
