@@ -42,11 +42,12 @@ This `flexdashboard` with Shiny was made for Homework 6 of [Jeff Goldsmith's Dat
 
 ```{r widgets}
 
+
 boros = bakery_inspec %>% distinct(boro) %>% pull()
 
-# selectInput widget
-selectInput("boro_choice", label = h3("Select Borough"),
-            choices = boros, selected = "Manhattan")
+checkboxGroupInput("boro_choice", label = h3("Select Borough"),
+            choices = boros, selected = "MANHATTAN")
+
 
 hr()
 
@@ -59,7 +60,7 @@ max_score = bakery_inspec %>% filter(boro == input$boro_choice) %>% select(score
 
 # sliderInput widget
 sliderInput("score_choice", label = h3("Choose score"), min = min_score, 
-        max = max_score, value = c(0, 93), step = 1)
+        max = max_score, value = c(0, 100), step = 1)
 
 })
 
