@@ -33,7 +33,7 @@ grade: Grade of each inspection
 
 
 ##### Collaborators:
-Rebecca Venetianer, Kaitlin Macejewski
+Rebecca Venetianer, Kaitlin Maciejewski
 
 
 
